@@ -1,10 +1,15 @@
 from fastapi import FastAPI
 from app.predictor import predict_genre
 from app.schema import TextInput, PredictionOut
-
+from fastapi.middleware.cors import CORSMiddleware
 # create the FastAPI app instance
 app = FastAPI(title="Book Genre Classifier API")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # endpoint: POST /predict
 @app.post("/predict", response_model=PredictionOut)
 def predict(payload: TextInput):
