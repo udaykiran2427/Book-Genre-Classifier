@@ -6,7 +6,7 @@ function App() {
   const [genres, setGenres] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
   const handleSubmit = async () => {
     if (!text.trim()) return;
 
@@ -15,7 +15,7 @@ function App() {
     setGenres(null);
 
     try {
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch(`${API_URL}/predict`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
